@@ -6,9 +6,9 @@
 
 # for color in colors: 
 
- #   r = color.rgb.r
- #   g = color.rgb.g
-  #  b = color.rgb.b
+#   r = color.rgb.r
+#   g = color.rgb.g
+#  b = color.rgb.b
 
    # color_tuple = (r, g, b) # Create a tuple of RGB values
    # rgb_colors.append(color_tuple) # Append the tuple to the list of RGB colors
@@ -58,10 +58,14 @@ tim.dot(20, dot_color) # Draw a dot with a diameter of 20 pixels and the chosen 
 
 for row in range(10): # Loop through 10 rows
     for col in range(10): # Loop through 10 columns
-        dot_color = random.choice(colors) # Choose a random color from the list of colors for the dots
-        tim.dot(20, dot_color) # Draw a dot with a diameter of 20 pixels and the chosen color
-        tim.forward(50) # Move the turtle forward by 50 pixels to create space for the next dot
+        dot_color = random.choice(colors)
+        tim.dot(20, dot_color)
+        tim.forward(50)
 
-    tim.goto(-225, -225 + (row + 1) * 50) # Move the turtle to the beginning of the next row
+    tim.setheading(90)
+    tim.forward(50)
+    tim.setheading(180)
+    tim.forward(500)
+    tim.setheading(0)
 
 screen.exitonclick() # Wait for a mouse click on the screen before closing the window
