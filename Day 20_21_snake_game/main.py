@@ -1,5 +1,7 @@
-from turtle import Screen , Turtle
+from turtle import Screen 
 from snake import Snake
+from food import Food
+from scoreboard import Scoreboard
 import time
 
 screen = Screen()
@@ -9,6 +11,8 @@ screen.title("Snake Game")
 screen.tracer(0) # turn off the screen updates for a smoother animation
 
 snake = Snake()
+food = Food()
+scoreboard = Scoreboard()
 
 screen.listen() # listen for keyboard events
 screen.onkey(snake.up, "Up") # when the user presses the up arrow, move the snake
@@ -23,5 +27,23 @@ while game_is_on:
     time.sleep(0.1) # wait for 100 milliseconds
     snake.move() # move the snake
 
+    # Detect collision with food
 
+    if snake.head.distance(food)  < 15:
+        food.refresh() # refresh the food location everytime it;s eaten
+        snake.extend_snake()
+        scoreboard.increment_score()
+
+    # Detect collision with the border
+    if snake.head.xcor() > 290 or snake.head.xcor()  < -290 or snake.head.ycor() > 290 or snake.head.ycor() < - 290: 
+        game_is_on = False
+        scoreboard.game_over()
+    
+    # Detect collision with the tail
+    for segment in snake.segments[1:]:  # because the head is the first segment in the snake, we don't want to check it against itself
+        # python slice notation: snake.segments[1:] means "from the second element (index 1) to the end of the list". there's also [: :-1] to increment by 1 and start from the end (-2 would increment by 2 and start from the end)
+        if snake.head.distance(segment) < 15:
+            game_is_on = False
+            scoreboard.game_over()
+ 
 screen.exitonclick() # keep the window open until the user clicks on it 
