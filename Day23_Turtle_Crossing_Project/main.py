@@ -14,6 +14,7 @@ player = Player()
 screen.onkey(player.move_up, "Up")
 
 car_manager = CarManager()
+scoreboard = Scoreboard()
 
 game_is_on = True
 while game_is_on:
@@ -23,11 +24,18 @@ while game_is_on:
     time.sleep(0.1)
     screen.update()
 
+
+
     # Check for collision with any car in the list of all cars
     for car in car_manager.all_cars:
-        if player.distance(car) < 18: # goes through all the cars in the list and checks if the player is too close to any of them, indicating a collision
+        if player.distance(car) < 20: # goes through all the cars in the list and checks if the player is too close to any of them, indicating a collision
             game_is_on = False
-    
-
+            scoreboard.game_over()
+            break
+    # Check if the player reached the top and update the level accordingly
+    if player.is_at_finish_line():
+        scoreboard.increase_level()
+        player.reset_position()
+        car_manager.level_up()
 
 screen.exitonclick()

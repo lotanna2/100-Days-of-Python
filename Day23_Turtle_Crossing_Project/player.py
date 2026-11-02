@@ -24,6 +24,7 @@ class Player(Turtle):
 
     def is_at_finish_line(self):
         if self.ycor() >= FINISH_LINE_Y:
+            self.reset_position()  # Reset the player's position to the starting position when reaching the finish line
             return True
         else:
             return False
