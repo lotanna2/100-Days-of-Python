@@ -28,6 +28,12 @@ class Snake:
         new_segment.goto(position)
         self.segments.append(new_segment)  # Add the new segment to the snake's list.
         
+    def reset(self):
+        for segment in self.segments:  # move all existing segments (snake segments) off-screen when clearing
+            segment.goto(1000, 1000)
+        self.segments.clear() # clear the list of segments
+        self.create_snake() # recreate the snake
+        self.head = self.segments[0] # reset the head to the first segment because we are re-initializing the snake
 
     def extend_snake(self): # Add a new segment to the snake's list at the last position (calling the add_segment function we use at the begining).
         self.add_segment(self.segments[-1].position()) # we are getting a hold of the last segment's position . so we're essentially adding a new segment to the snake at the same position as the last segment . position() is a method that returns the position of the turtle object
@@ -35,8 +41,8 @@ class Snake:
     def move(self):
         # Move each segment by targeting the segment number in front of it.
         for seg_num in range(len(self.segments) - 1, 0, -1): # range(start, end, step) is a function that returns a list of numbers from start to end, incremented by step
-            new_x = self.segments[seg_num - 1].xcor()
-            new_y = self.segments[seg_num - 1].ycor()
+            new_x = self.segments[seg_num - 1].xcor() # targeting the x coordinate of the segment number in front of it, seg_num - 1 is the segment number in front of it, so we're targeting the x coordinate of the segment number 2 before it
+            new_y = self.segments[seg_num - 1].ycor() # targeting the y coordinate of the segment number in front of it
             self.segments[seg_num].goto(new_x, new_y)
 
         # Move the head forward by the distance specified in move_distance cited above

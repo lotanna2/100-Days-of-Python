@@ -36,14 +36,14 @@ while game_is_on:
 
     # Detect collision with the border
     if snake.head.xcor() > 290 or snake.head.xcor()  < -290 or snake.head.ycor() > 290 or snake.head.ycor() < - 290: 
-        game_is_on = False
-        scoreboard.game_over()
+        scoreboard.reset() # reset the scoreboard when the snake hits the border
+        snake.reset() # reset the snake to its initial state
     
     # Detect collision with the tail
     for segment in snake.segments[1:]:  # because the head is the first segment in the snake, we don't want to check it against itself
         # python slice notation: snake.segments[1:] means "from the second element (index 1) to the end of the list". there's also [: :-1] to increment by 1 and start from the end (-2 would increment by 2 and start from the end)
-        if snake.head.distance(segment) < 15:
-            game_is_on = False
-            scoreboard.game_over()
+        if snake.head.distance(segment) < 10:
+            scoreboard.reset() # reset the scoreboard when the snake hits its tail
+            snake.reset() # reset the snake to its initial state
  
 screen.exitonclick() # keep the window open until the user clicks on it 
