@@ -1,0 +1,5 @@
+{'website': 'primeries ', 'email': 'lotaonye3@gmail.com', 'password': 'password'}
+primeries lotaonye3@gmail.com password
+primeries lotaonye3@gmail.com password
+{'website': 'amazon ', 'email': 'lotaonye3@gmail.com', 'password': '1234'}
+{'website': 'redit', 'email': 'lotaonye3@gmail.com', 'password': 'raigebait'}
